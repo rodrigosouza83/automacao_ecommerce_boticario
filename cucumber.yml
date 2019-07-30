@@ -1,0 +1,19 @@
+---
+default: -p pretty  -p chrome -p homolog -p html -p json
+
+pretty: --format pretty
+progress: --format progress
+
+#scenario: -t @hpage
+
+
+homolog: AMBIENTE=homolog
+producao: AMBIENTE=producao --no-source --color
+
+firefox: BROWSER=firefox
+chrome: BROWSER=chrome
+chrome_headless: BROWSER=chrome_headless
+
+html: --format html --out=results/report.html
+json: --format json_pretty --out=results/report.json
+

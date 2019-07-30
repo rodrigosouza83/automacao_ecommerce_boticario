@@ -1,11 +1,10 @@
 # language: pt
 
-@scroll
-
 Funcionalidade: Testar função Scroll
 Quero verificar se o scroll bar da Home Page
 Está funcionando corretamente
 
+@scroll
 Cenário: Teste ScrollBar HomePage
 
 Dado que o usuário esteja navegando pela home Page

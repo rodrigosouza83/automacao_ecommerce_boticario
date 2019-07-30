@@ -1,12 +1,13 @@
 # language:pt
 
-@busca_invalida
+
 
 Funcionalidade: Busca inválida
     Eu como QA quero 
     Realizar uma busca inválida no ecommerce
     Para verificar o retorno apresentado no front-end
 
+    @busca_invalida
     Cenário: Busca Inválida Home Page
      
      Dado que eu acesse a HomePage do O Boticário

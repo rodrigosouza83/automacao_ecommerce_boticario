@@ -1,27 +1,36 @@
-require 'rspec'
 require 'capybara'
-require 'cucumber'
 require 'capybara/cucumber'
 require 'selenium-webdriver'
-require 'faker'
-require 'pry'
 require 'site_prism'
+require 'rspec'
 
-   
+require_relative 'helper.rb'
+require_relative 'page_helper.rb'
 
-Capybara.register_driver :chrome do |app|
-    Capybara::Selenium::Driver.new(app,:browser => :chrome,
-        :desired_capabilities => Selenium::WebDriver::Remote::Capabilities.chrome(
-            'chromeOptions' => {
-                'args' => [ "--start-maximized" ]}
-        )
-    )
-    
-end    
-Capybara.configure do |config|
-    config.default_driver = :chrome
-   
-    config.app_host ='https://www.boticario.com.br'
+World Capybara::DSL
+World Capybara::RSpecMatchers
+
+World Page
+World Helper
+
+BROWSER = ENV['BROWSER']
+AMBIENTE = ENV['AMBIENTE']
+
+CONFIG = YAML.load_file(File.dirname(__FILE__) + "/ambientes/#{AMBIENTE}.yml")
+
+case ENV['BROWSER'] 
+when "firefox"
+  @driver = :selenium
+when "chrome"
+  @driver = :selenium_chrome
+when "chrome_headless"
+  @driver = :selenium_headless
+else
+  puts "blablablablablabla"
 end
 
-Capybara.default_max_wait_time = 5
+Capybara.configure do |config|
+  config.default_driver = @driver
+  config.default_max_wait_time = 60
+  config.app_host = CONFIG['url_padrao']
+end
